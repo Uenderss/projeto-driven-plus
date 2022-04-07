@@ -11,6 +11,7 @@ import { useContext } from "react";
 import UserContext from "./Paginas/UserContext.js";
 
 const LoginPage = (props) => {
+  
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -18,10 +19,10 @@ const LoginPage = (props) => {
   
   useEffect(() => {
   if(props.login.length > 0){
-     setEmail(props.email);
+     setEmail(props.login);
      setSenha(props.senha);
   } 
-  }, [props.email, props.login.length, props.senha]);
+  }, [props]);
 
   function handleSubmit(e) {
     e.preventDefault();

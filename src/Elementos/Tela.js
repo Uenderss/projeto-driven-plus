@@ -17,6 +17,7 @@ export const Tela = styled.section`
   h1 {
     left: 14.93%;
     right: 14.93%;
+    margin:24px 0;
     font-family: "Roboto";
     font-style: normal;
     font-weight: 700;
@@ -46,5 +47,20 @@ export const Tela = styled.section`
       color: #7e7e7e;
       text-indent: 1em;
     }
+  }
+  form div{
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:300px;
+    margin: 0;
+    padding: 0;
+  }
+  form div input {
+    width: 145px;
+    margin:0;
+    padding:0;
+    text-align: left;
   }
 `;

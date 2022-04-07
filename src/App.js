@@ -4,6 +4,7 @@ import Cadastro from "./Cadastro";
 import GlobalCss from "./GlobalCss";
 import Home from './Paginas/Home';
 import Subscriptions from "./Paginas/Subscriptions";
+import SubscriptionsId from "./Paginas/SubscriptionsId";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserContext from './Paginas/UserContext.js';
 
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/" element={<LoginPage login={login} senha={senha} />} />
         <Route path="/home" element={<Home/>}/>
         <Route exact path="/subscriptions" element={<Subscriptions />}/>
+        <Route path="/subscriptions/:id" element={<SubscriptionsId/>}/>
         
         
       </Routes>

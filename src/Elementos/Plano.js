@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import {Link} from 'react-router-dom';
 
-const Plano = styled(Link)`
+
+const Plano = styled.div`
   display: flex;
   cursor: pointer;
   justify-content: center;
