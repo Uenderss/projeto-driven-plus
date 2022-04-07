@@ -7,13 +7,14 @@ import Logo from "./Elementos/Logo";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
+import UserContext from "./Paginas/UserContext.js";
 
 const LoginPage = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
- 
+  const {setToken}=useContext(UserContext);
 
   if(props.login.length > 0){
      setEmail(props.email);
@@ -30,10 +31,10 @@ const LoginPage = (props) => {
         email,
         password:senha
       }).then(function (response) {
-        response.data.membership === null
-          ? navigate("/subscriptions")
+        setToken(response.data.token);
+        response.data.membership === null ? navigate("/subscriptions")
           : navigate("/home");
-        //  response.data.token;
+          
       }).catch(function (error) {
         alert("Email ou senha invalido. Tente novamente!");
         setSenha("");

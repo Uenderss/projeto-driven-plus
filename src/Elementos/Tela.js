@@ -9,6 +9,7 @@ export const Tela = styled.section`
   align-items: center;
   background: #0e0e13;
   padding: 34px;
+  
   form {
     display: flex;
     flex-direction: column;
