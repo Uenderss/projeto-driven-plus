@@ -14,7 +14,7 @@ const Cadastro = (props) => {
   const [cpfCnpj, setCpfCnpj] = useState("");
   const [mask, setMask] = useState("");
   const [senha, setSenha] = useState("");
-
+  console.log(mask);
   function handleSubmit(e) {
     e.preventDefault();
     console.log(cpfCnpj);
@@ -75,8 +75,9 @@ const Cadastro = (props) => {
         <Button type="submit" value="Submit">
           Entrar
         </Button>
+        <StyledLink to="/">Já possuí uma conta? Entre</StyledLink> 
       </form>
-      <StyledLink to="/">Já possuí uma conta? Entre</StyledLink>
+      
     </Tela>
   );
 };

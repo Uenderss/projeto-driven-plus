@@ -7,9 +7,24 @@ export const Tela = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
   background: #0e0e13;
   padding: 34px;
-  
+
+  svg{
+    margin: 100px auto;
+  }
+  h1 {
+    left: 14.93%;
+    right: 14.93%;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: center;
+    color: #ffffff;
+  }
   form {
     display: flex;
     flex-direction: column;

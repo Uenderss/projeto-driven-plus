@@ -4,7 +4,7 @@ import { Input } from "./Elementos/Input.js";
 import { Button } from "./Elementos/Button.js";
 import { StyledLink } from "./Elementos/StyledLink";
 import Logo from "./Elementos/Logo";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -15,12 +15,14 @@ const LoginPage = (props) => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const {setToken}=useContext(UserContext);
-
+  
+  useEffect(() => {
   if(props.login.length > 0){
      setEmail(props.email);
      setSenha(props.senha);
   } 
-  
+  }, [props.email, props.login.length, props.senha]);
+
   function handleSubmit(e) {
     e.preventDefault();
     console.log("email",email);
@@ -61,8 +63,9 @@ const LoginPage = (props) => {
         <Button type="submit" value="Submit">
           Entrar
         </Button>
+        <StyledLink to="/cadastro">Não possuí uma conta? Cadastre-se</StyledLink>
       </form>
-      <StyledLink to="/cadastro">Não possuí uma conta? Cadastre-se</StyledLink>
+      
     </Tela>
   );
 };
