@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { StrictMode } from 'react/cjs/react.production.min';
-import App from './App';
+import App from './App.js';
 
-ReactDOM.render(<StrictMode><App/></StrictMode>,document.querySelector(".root"));
+ReactDOM.render(<React.StrictMode><App/></React.StrictMode>,document.querySelector(".root"));
