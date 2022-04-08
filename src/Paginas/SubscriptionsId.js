@@ -20,26 +20,26 @@ const SubscriptionsId = () => {
   const [digitosDoCartao, setDigitosDoCartao] = useState("");
   const [codigoDeSeguranca, setCodigoDeSeguranca] = useState("");
   const [validade, setValidade] = useState("");
-  const [plano, setPlano] = useState([{ perks: [{}] }]);
+  const [plano, setPlano] = useState([]);
 
   // const {token}=useContext(UserContext);
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjA0LCJpYXQiOjE2NDkzMDQwODd9.6D4xpAaqh019PNeQpEkE2KcWoDaSK0R-v1K7MA_PPxg";
-
-  useEffect(() => {
     const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-
+        headers: { Authorization: `Bearer ${token}` },
+      };
+  
+  useEffect(() => {
+    
     axios
       .get(
         `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${pagina.id}`,
         config
       )
       .then((response) => {
-        // useEffect(() => {
+       if(response.data.perks.length > 0){
         setPlano(response.data);
-        // }, [response])
+       }
       })
       .catch((err) => console.log("conexão falhou"));
   }, [pagina.id]);
@@ -48,13 +48,13 @@ const SubscriptionsId = () => {
     e.preventDefault();
 
     axios
-      .post("https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions", {
+      .post("https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions",  {
         membershipId: plano.id,
         cardName: nome,
         cardNumber: digitosDoCartao,
         securityNumber: codigoDeSeguranca,
         expirationDate: validade,
-      })
+      },config)
       .then(function (response) {
         console.log(response.data);
       })
@@ -78,7 +78,7 @@ const SubscriptionsId = () => {
             <Beneficios /> Beneficios:
           </p>
         </div>
-        <div>
+         {/* <div>
           {plano.perks?.length === 0 ? (
             <></>
           ) : (
@@ -87,7 +87,7 @@ const SubscriptionsId = () => {
               return <p key={index}>{`${index + 1}. ${perk.title}`}</p>;
             })
           )}
-        </div>
+        </div>  */}
         <div>
           <p>
             <Preco /> Preco:{" "}
@@ -104,20 +104,20 @@ const SubscriptionsId = () => {
           onChange={(e) => setNome(e.target.value)}
         />
         <Input
-          type="number"
+          type="text"
           placeholder="Digitos do Cartão"
           value={digitosDoCartao}
           onChange={(e) => setDigitosDoCartao(e.target.value)}
         />
         <div>
           <Input
-            type="number"
+            type="text"
             placeholder="Código de segurança"
             value={codigoDeSeguranca}
             onChange={(e) => setCodigoDeSeguranca(e.target.value)}
           />
           <Input
-            type="number"
+            type="text"
             placeholder="Validade"
             value={validade}
             onChange={(e) => setValidade(e.target.value)}
