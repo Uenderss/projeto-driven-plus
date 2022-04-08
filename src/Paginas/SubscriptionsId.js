@@ -21,8 +21,10 @@ import LogoPlano from "../Elementos/LogoPlano";
 
 const SubscriptionsId = () => {
   
+  const {dados,setDados}=useContext(UserContext);
+  console.log();
   const config = {
-    headers: { Authorization: `Bearer ${token}` },
+    headers: { Authorization: `Bearer ${dados.token}` },
   };
   const pagina = useParams();
   const navigate = useNavigate();
@@ -35,10 +37,9 @@ const SubscriptionsId = () => {
 
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  const {token,setDados}=useContext(UserContext);
   
 
-  console.log(token);
+
 
   useEffect(() => {
     
@@ -70,8 +71,8 @@ const SubscriptionsId = () => {
         config
       )
       .then(function (response) {
-        navigate("/home");
         setDados(response.data);
+        navigate("/home");
   
       })
       .catch(function (error) {
@@ -152,7 +153,7 @@ const SubscriptionsId = () => {
             onChange={(e) => setValidade(e.target.value)}
           />
         </div>
-
+            <MeuModal>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -176,6 +177,7 @@ const SubscriptionsId = () => {
             </div>
           </Caixa>
         </Modal>
+        </MeuModal>
       </form>
       <Button onClick={(e) => openModal(e)}>Assinar</Button>
     </Tela>
@@ -183,6 +185,13 @@ const SubscriptionsId = () => {
 };
 
 export default SubscriptionsId;
+
+const MeuModal=styled.div`
+  .ReactModal__Overlay.ReactModal__Overlay--after-open{
+      background-color: rgba(0,0,0,0.75);
+  }
+
+`;
 
 const Logotipo = styled.div`
   width: 164px;

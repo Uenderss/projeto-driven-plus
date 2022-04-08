@@ -10,14 +10,18 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Subscriptions = () => {
+
   
-  const { dados } = useContext(UserContext);
- 
-  const config = {
-    headers: { Authorization: `Bearer ${ dados.token }` },
-  };
+  // const { dados } = useContext(UserContext);
+  
   const [planos, setPlanos] = useState([{}]);
   
+  const config = {
+    headers: { Authorization: `Bearer ${ localStorage.getItem('token') }` },
+  };
+
+ 
+
 
   useEffect(() => {
     
@@ -27,8 +31,8 @@ const Subscriptions = () => {
         config
       )
       .then((response) => {
+        console.log(response);
         setPlanos(response.data);
-        console.log("isso", response.data);
       })
       .catch((err) => console.log("deu erro"));
   }, []);

@@ -1,4 +1,4 @@
-import React, { useContext,useEffect } from "react";
+import React, { useContext } from "react";
 import { Tela } from "../Elementos/Tela";
 import UserContext from "./UserContext";
 import { Button } from "../Elementos/Button";
@@ -8,30 +8,30 @@ import LogoPlano from "../Elementos/LogoPlano";
 import { NavLink} from 'react-router-dom';
 import axios from 'axios';
 
-
 const Home = () => {
 
     
   const { dados } = useContext(UserContext);
   
-
+ 
   const config = {
     headers: { Authorization: `Bearer ${ dados.token }` },
   };
+function cancelarPlano(){    
   
-  useEffect(() => {
-    
     axios
-      .get(
-        "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships",
+      .delete(
+        `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memb
+        erships`,
         config
       )
       .then((response) => {
+        alert("Excluido com sucesso")
+        console.log("nayna",response);
         
-        console.log("isso", response.data);
       })
       .catch((err) => console.log("deu erro"));
-  }, []);
+  };
 
   return (
     <Tela>
@@ -48,7 +48,7 @@ const Home = () => {
           {dados != null ? (
             dados.membership.perks.map((perk, index) => {
               const { title,link } = perk;
-              return  <ButtonLink to={link} key={index}>{`${index + 1}. ${title}`}</ButtonLink>;
+              return  <Button onClick={()=>{window.location.href =(link)}}key={index}>{`${index + 1}. ${title}`}</Button>;
                      
             })
           ) : (
@@ -57,7 +57,7 @@ const Home = () => {
         </Vantagens>
       <Footer>
       <ButtonLink  to={"/subscriptions"}>Mudar Plano</ButtonLink>
-      <Button style={{ background: "#FF4747" } }  >Cancelar Plano</Button>
+      <Button style={{ background: "#FF4747" }  } onclick={cancelarPlano} >Cancelar Plano</Button>
       </Footer>
     </Tela>
   );

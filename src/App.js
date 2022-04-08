@@ -15,7 +15,7 @@ const App = () => {
   const [senha, setSenha] = useState("");
   // const [token,setToken]=useState(null);
   const [dados,setDados]=useState(null);
-  localStorage.setItem("mykey","myvalue");
+ 
 
  
   return (

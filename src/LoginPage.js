@@ -34,16 +34,16 @@ const LoginPage = (props) => {
         password:senha
 
       }).then(function (response) {
-        
+        localStorage.setItem('token',response.data.token);
+        setDados( response.data);
+        console.log(response.data);
         if(response.data.membership === null){
           navigate("/subscriptions");
         }else{
            navigate("/home");  
         }
-  
-        setDados(response.data);
-        console.log(response.data); 
-          
+        
+
       }).catch(function (error) {
         alert("Email ou senha invalido. Tente novamente!");
         setSenha("");
@@ -51,7 +51,6 @@ const LoginPage = (props) => {
         console.log(error);
       });
   }
- 
   return (
     <Tela>
       <Logo />
