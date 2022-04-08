@@ -8,38 +8,39 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Tela } from "../Elementos/Tela";
 import PlanoEscolhido from "../Elementos/PlanoEscolhido";
-import ListarPlano from "../Elementos/ListarPlano.js";
 import { Input } from "../Elementos/Input";
 import { Button } from "../Elementos/Button";
 import LogoPlano from "../Elementos/LogoPlano";
 import Preco from "../assets/Preco";
 import Beneficios from "../assets/Beneficios";
+
+
 const SubscriptionsId = () => {
   const pagina = useParams();
   const [nome, setNome] = useState("");
   const [digitosDoCartao, setDigitosDoCartao] = useState("");
   const [codigoDeSeguranca, setCodigoDeSeguranca] = useState("");
   const [validade, setValidade] = useState("");
-  const [plano, setPlano] = useState([]);
+  const [plano, setPlano] = useState(null);
+  
 
   // const {token}=useContext(UserContext);
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjA0LCJpYXQiOjE2NDkzMDQwODd9.6D4xpAaqh019PNeQpEkE2KcWoDaSK0R-v1K7MA_PPxg";
-    const config = {
-        headers: { Authorization: `Bearer ${token}` },
-      };
-  
+
   useEffect(() => {
-    
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
     axios
       .get(
         `https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships/${pagina.id}`,
         config
       )
       .then((response) => {
-       if(response.data.perks.length > 0){
-        setPlano(response.data);
-       }
+       
+          setPlano(response.data);
+    
       })
       .catch((err) => console.log("conexão falhou"));
   }, [pagina.id]);
@@ -47,15 +48,26 @@ const SubscriptionsId = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
+    //fazer pergunta na tela
+  // de acordo com a resposta faço a ocao
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+
     axios
-      .post("https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions",  {
-        membershipId: plano.id,
-        cardName: nome,
-        cardNumber: digitosDoCartao,
-        securityNumber: codigoDeSeguranca,
-        expirationDate: validade,
-      },config)
+      .post(
+        "https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions",
+        {
+          membershipId: plano.id,
+          cardName: nome,
+          cardNumber: digitosDoCartao,
+          securityNumber: codigoDeSeguranca,
+          expirationDate: validade,
+        },
+        config
+      )
       .then(function (response) {
+        
         console.log(response.data);
       })
       .catch(function (error) {
@@ -67,32 +79,32 @@ const SubscriptionsId = () => {
         console.log(error);
       });
   }
+
   return (
-    <Tela>
+    <Tela id="telaModal">
       <Logotipo>
-        <LogoPlano src={plano.image} name={plano.name} />
+        <LogoPlano src={plano && plano.image} name={plano && plano.name} />
       </Logotipo>
       <PlanoEscolhido>
-        <div>
-          <p>
+        
+          <h2>
             <Beneficios /> Beneficios:
-          </p>
-        </div>
-         {/* <div>
-          {plano.perks?.length === 0 ? (
-            <></>
-          ) : (
-            plano.perks.map((perk, index) => {
-              const { id } = perk;
-              return <p key={index}>{`${index + 1}. ${perk.title}`}</p>;
-            })
-          )}
-        </div>  */}
+          </h2>
         <div>
-          <p>
+          {plano != null ? (
+            plano.perks.map((perk, index) => {
+              const { title } = perk;
+              return <p key={index}>{`${index + 1}. ${title}`}</p>;
+            })
+          ) : (
+            <></>
+          )}
+        </div>
+        <div>
+          <h2>
             <Preco /> Preco:{" "}
-          </p>
-          <p> R$ {plano.price} cobrados mensalmente</p>
+            </h2>
+          <p> R$ {plano && plano.price} cobrados mensalmente</p>
         </div>
       </PlanoEscolhido>
 

@@ -1,7 +1,15 @@
 import styled from "styled-components";
 
 const PlanoEscolhido = styled.div`
-  p svg {
+ min-height: 116px;
+  width: 295px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+  margin:13px;
+  h2 svg {
     margin: 0;
     padding: 0;
   }
@@ -11,13 +19,10 @@ const PlanoEscolhido = styled.div`
     font-size: 16px;
     line-height: 19px;
     color: #ffffff;
+
   }
-  min-height: 116px;
-  width: 295px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color: white;
-  margin:13px;
+  div{
+    margin: 10px 0;
+  }
 `;
 export default PlanoEscolhido;

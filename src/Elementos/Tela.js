@@ -62,5 +62,8 @@ export const Tela = styled.section`
     margin:0;
     padding:0;
     text-align: left;
+    &::placeholder{
+     font-size:12px;
+    }
   }
 `;
