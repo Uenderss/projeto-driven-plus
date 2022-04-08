@@ -14,10 +14,12 @@ const Cadastro = (props) => {
   const [cpfCnpj, setCpfCnpj] = useState("");
   const [mask, setMask] = useState("");
   const [senha, setSenha] = useState("");
-  console.log(mask);
+ 
+  
+  
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(cpfCnpj);
+    
     axios
       .post("https://mock-api.driven.com.br/api/v4/driven-plus/auth/sign-up", {
         email: email,

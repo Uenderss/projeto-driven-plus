@@ -15,5 +15,6 @@ width: 40%;
     line-height: 28px;
     color: #ffffff;
   }
+  
 `;
 export default Preco;

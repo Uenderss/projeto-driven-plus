@@ -13,9 +13,13 @@ import UserContext from './Paginas/UserContext.js';
 const App = () => {
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
-  const [token,setToken]=useState(null);
+  // const [token,setToken]=useState(null);
+  const [dados,setDados]=useState(null);
+  localStorage.setItem("mykey","myvalue");
+
+ 
   return (
-    <UserContext.Provider value={{token,setToken}}>
+    <UserContext.Provider value={{dados,setDados}}>
     <BrowserRouter>
       <GlobalCss />
       <Routes>

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const LogoPlano = (props) => {
-  console.log(props);
+  
 
   return (
     <>

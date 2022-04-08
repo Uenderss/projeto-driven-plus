@@ -11,6 +11,7 @@ export const Tela = styled.section`
   background: #0e0e13;
   padding: 34px;
 
+
   svg{
     margin: 100px auto;
   }

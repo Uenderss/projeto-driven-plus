@@ -6,7 +6,7 @@ export const StyledLink = styled(Link)`
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
-  text-decoration-line: underline;
+  text-decoration: none;
   color: #ffffff;
   cursor: pointer;
 `;

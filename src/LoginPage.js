@@ -1,4 +1,3 @@
-import React from "react";
 import { Tela } from "./Elementos/Tela.js";
 import { Input } from "./Elementos/Input.js";
 import { Button } from "./Elementos/Button.js";
@@ -15,7 +14,7 @@ const LoginPage = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const {setToken}=useContext(UserContext);
+  const {setDados}=useContext(UserContext);
   
   useEffect(() => {
   if(props.login.length > 0){
@@ -31,12 +30,19 @@ const LoginPage = (props) => {
     
     axios
       .post("https://mock-api.driven.com.br/api/v4/driven-plus/auth/login", {
-        email,
+        email:email,
         password:senha
+
       }).then(function (response) {
-        setToken(response.data.token);
-        response.data.membership === null ? navigate("/subscriptions")
-          : navigate("/home");
+        
+        if(response.data.membership === null){
+          navigate("/subscriptions");
+        }else{
+           navigate("/home");  
+        }
+  
+        setDados(response.data);
+        console.log(response.data); 
           
       }).catch(function (error) {
         alert("Email ou senha invalido. Tente novamente!");
@@ -45,6 +51,7 @@ const LoginPage = (props) => {
         console.log(error);
       });
   }
+ 
   return (
     <Tela>
       <Logo />
